@@ -13,35 +13,52 @@ struct ActivitiesView: View {
     
     @State private var activities = [Activity]()
     @State private var isLoadingNewActivity = false
+    @State private var searchText = ""
     
+    private var searchResults: [Activity] {
+        let searchedActivities = activities.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        return searchText.isEmpty ? activities : searchedActivities
+    }
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(activities) { activity in
-                    VStack(alignment: .leading) {
-                        Text(activity.name)
-                            .layoutPriority(1)
-                        HStack {
-                            Image(systemName: "person.2.fill")
-                            Text("\(activity.participants)")
+            ZStack {
+                List {
+                    ForEach(searchResults) { activity in
+                        VStack(alignment: .leading) {
+                            Text(activity.name)
+                                .layoutPriority(1)
+                            HStack {
+                                Image(systemName: "person.2.fill")
+                                Text("\(activity.participants)")
+                            }
                         }
                     }
+                    .onDelete(perform: deleteItems)
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .navigationBarTitle("Bored?")
-            .navigationBarItems(trailing:
-                                    Button(action: addActivity) {
-                Group {
-                    if isLoadingNewActivity {
-                        ProgressView()
-                    } else {
-                        Image(systemName: "plus")
+                .searchable(text: $searchText)
+                .navigationBarTitle("Bored?")
+                .navigationBarItems(
+                    trailing:
+                        Button(action: addActivity) {
+                    Group {
+                        if isLoadingNewActivity {
+                            ProgressView()
+                        } else {
+                            Image(systemName: "plus")
+                        }
                     }
+                })
+                .disabled(isLoadingNewActivity)
+                
+                if !searchText.isEmpty && searchResults.isEmpty {
+                    Text("Huh, I guess you really do have nothing to do")
+                    Text("🤷").font(.title)
                 }
-            })
-            .disabled(isLoadingNewActivity)
+            }
+        }
+        .task {
+            await fetchActivityAsync()
         }
     }
     
