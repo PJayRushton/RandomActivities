@@ -9,47 +9,58 @@ import SwiftUI
 
 struct ActivitiesView: View {
     
-    private let activityFetcher = ActivityFetcher()
+    // MARK: - State
     
     @State private var activities = [Activity]()
     @State private var isLoadingNewActivity = false
     @State private var searchText = ""
+    @State private var isShowingActivityCreation = false
     
+    
+    // MARK: - Properties
+    
+    private let activityFetcher = ActivityFetcher()
     private var searchResults: [Activity] {
         let searchedActivities = activities.filter { $0.name.lowercased().contains(searchText.lowercased()) }
         return searchText.isEmpty ? activities : searchedActivities
     }
     
+    
+    // MARK: - Body
+    
     var body: some View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach(searchResults) { activity in
-                        VStack(alignment: .leading) {
-                            Text(activity.name)
-                                .layoutPriority(1)
+                    Section {
+                        Button(action: addActivity) {
                             HStack {
-                                Image(systemName: "person.2.fill")
-                                Text("\(activity.participants)")
+                                Image(systemName: "plus")
+                                Text("Generate Random")
                             }
                         }
                     }
-                    .onDelete(perform: deleteItems)
+                    
+                    Section {
+                        ForEach(searchResults) { activity in
+                            VStack(alignment: .leading) {
+                                Text(activity.name)
+                                    .layoutPriority(1)
+                                HStack {
+                                    Image(systemName: "person.2.fill")
+                                    Text("\(activity.participants)")
+                                }
+                            }
+                        }
+                        .onDelete(perform: deleteItems)
+                    }
                 }
-                .searchable(text: $searchText)
                 .navigationBarTitle("Bored?")
                 .navigationBarItems(
                     trailing:
-                        Button(action: addActivity) {
-                    Group {
-                        if isLoadingNewActivity {
-                            ProgressView()
-                        } else {
-                            Image(systemName: "plus")
-                        }
-                    }
+                        Button(action: presentActivityCreationView) {
+                    Image(systemName: "plus")
                 })
-                .disabled(isLoadingNewActivity)
                 
                 if !searchText.isEmpty && searchResults.isEmpty {
                     Text("Huh, I guess you really do have nothing to do")
@@ -57,14 +68,26 @@ struct ActivitiesView: View {
                 }
             }
         }
+        .searchable(text: $searchText)
         .task {
             await fetchActivityAsync()
         }
+        .sheet(isPresented: $isShowingActivityCreation, onDismiss: nil) {
+            ActivityCreationView { activity in
+                withAnimation {
+                    activities.insert(activity, at: 0)
+                    }
+                }
+            }
     }
     
 }
 
 private extension ActivitiesView {
+    
+    func presentActivityCreationView() {
+        isShowingActivityCreation = true
+    }
     
     func addActivity() {
         async {

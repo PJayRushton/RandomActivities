@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A10982A9267A67C500208120 /* ActivityCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10982A8267A67C500208120 /* ActivityCreationView.swift */; };
+		A1321BA8267A9D3300169DE6 /* ActivityNameEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1321BA7267A9D3300169DE6 /* ActivityNameEntryView.swift */; };
 		A1E4649A26794769008A3868 /* SwiftUIScratchPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4649926794769008A3868 /* SwiftUIScratchPadApp.swift */; };
 		A1E4649C26794769008A3868 /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4649B26794769008A3868 /* ActivitiesView.swift */; };
 		A1E4649E2679476B008A3868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E4649D2679476B008A3868 /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A10982A8267A67C500208120 /* ActivityCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCreationView.swift; sourceTree = "<group>"; };
+		A1321BA7267A9D3300169DE6 /* ActivityNameEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityNameEntryView.swift; sourceTree = "<group>"; };
 		A1E4649626794769008A3868 /* SwiftUIScratchPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIScratchPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E4649926794769008A3868 /* SwiftUIScratchPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIScratchPadApp.swift; sourceTree = "<group>"; };
 		A1E4649B26794769008A3868 /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
@@ -36,6 +40,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A1749F7D267AAAA4005A33D9 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A1E4649B26794769008A3868 /* ActivitiesView.swift */,
+				A10982A8267A67C500208120 /* ActivityCreationView.swift */,
+				A1321BA7267A9D3300169DE6 /* ActivityNameEntryView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		A1749F7E267AAAAD005A33D9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A1E464B026794DC7008A3868 /* Activity.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A1749F7F267AAAB5005A33D9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A1E464AC26794A12008A3868 /* ActivityFetcher.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		A1E4648D26794769008A3868 = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				A1E4649926794769008A3868 /* SwiftUIScratchPadApp.swift */,
-				A1E4649B26794769008A3868 /* ActivitiesView.swift */,
-				A1E464AC26794A12008A3868 /* ActivityFetcher.swift */,
-				A1E464B026794DC7008A3868 /* Activity.swift */,
+				A1749F7D267AAAA4005A33D9 /* UI */,
+				A1749F7F267AAAB5005A33D9 /* Controllers */,
+				A1749F7E267AAAAD005A33D9 /* Model */,
 				A1E4649D2679476B008A3868 /* Assets.xcassets */,
 				A1E4649F2679476B008A3868 /* Preview Content */,
 			);
@@ -144,7 +174,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E464AD26794A12008A3868 /* ActivityFetcher.swift in Sources */,
+				A10982A9267A67C500208120 /* ActivityCreationView.swift in Sources */,
 				A1E4649C26794769008A3868 /* ActivitiesView.swift in Sources */,
+				A1321BA8267A9D3300169DE6 /* ActivityNameEntryView.swift in Sources */,
 				A1E464B126794DC7008A3868 /* Activity.swift in Sources */,
 				A1E4649A26794769008A3868 /* SwiftUIScratchPadApp.swift in Sources */,
 			);
