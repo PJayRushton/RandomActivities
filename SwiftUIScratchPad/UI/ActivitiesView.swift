@@ -19,52 +19,53 @@ struct ActivitiesView: View {
     
     // MARK: - Properties
     
-    private let activityFetcher = ActivityFetcher()
+    private let activityFetcher = ActivityFetcher.shared
     private var searchResults: [Activity] {
         let searchedActivities = activities.filter { $0.name.lowercased().contains(searchText.lowercased()) }
         return searchText.isEmpty ? activities : searchedActivities
     }
+    private let emptyImageURL = URL(string: "https://www.memesmonkey.com/images/memesmonkey/83/83ea231de826c7bf7113a76ae817a781.jpeg")!
     
     
     // MARK: - Body
     
     var body: some View {
         NavigationView {
-            ZStack {
-                List {
-                    Section {
-                        Button(action: addActivity) {
-                            HStack {
-                                Image(systemName: "plus")
-                                Text("Generate Random")
-                            }
+            List {
+                Section {
+                    Button(action: addActivity) {
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("Generate Random")
                         }
-                    }
-                    
-                    Section {
-                        ForEach(searchResults) { activity in
-                            VStack(alignment: .leading) {
-                                Text(activity.name)
-                                    .layoutPriority(1)
-                                HStack {
-                                    Image(systemName: "person.2.fill")
-                                    Text("\(activity.participants)")
-                                }
-                            }
-                        }
-                        .onDelete(perform: deleteItems)
                     }
                 }
-                .navigationBarTitle("Bored?")
-                .navigationBarItems(
-                    trailing:
-                        Button(action: presentActivityCreationView) {
-                    Image(systemName: "plus")
-                })
                 
+                Section {
+                    ForEach(searchResults) { activity in
+                        ActivityCell(activity: activity)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button {
+                                    deleteActivity(activity)
+                                } label: {
+                                    Image(systemName: "trash")
+                                }
+                                .tint(.red)
+                            }
+                    }
+                }
+            }
+            .listStyle(.insetGrouped)
+            .navigationBarTitle("Bored?")
+            .navigationBarItems(
+                trailing:
+                    Button(action: presentActivityCreationView) {
+                Image(systemName: "plus")
+            })
+            .overlay {
                 if !searchText.isEmpty && searchResults.isEmpty {
-                    Text("Huh, I guess you really do have nothing to do")
-                    Text("🤷").font(.title)
+                    AsyncImage(url: emptyImageURL)
+                        .padding(.top)
                 }
             }
         }
@@ -76,12 +77,13 @@ struct ActivitiesView: View {
             ActivityCreationView { activity in
                 withAnimation {
                     activities.insert(activity, at: 0)
-                    }
                 }
             }
+        }
     }
     
 }
+
 
 private extension ActivitiesView {
     
@@ -108,10 +110,11 @@ private extension ActivitiesView {
             isLoadingNewActivity = false
         }
     }
-    
-    func deleteItems(offsets: IndexSet) {
+
+    func deleteActivity(_ activity: Activity) {
         withAnimation {
-            offsets.forEach { activities.remove(at: $0) }
+            guard let index = activities.firstIndex(of: activity) else { return }
+            activities.remove(at: index)
         }
     }
     

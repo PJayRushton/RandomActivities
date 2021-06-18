@@ -20,7 +20,18 @@ struct Activity: Identifiable, Hashable {
     let accessibilityFactor: Double
     let priceFactor: Double
     
+    var numberOfDollarSigns: Int {
+        guard priceFactor > 0 else { return 0 }
+        return min(Int(priceFactor * 4.0), 4)
+    }
+    
+    var dollarString: String {
+        let dollars = Array(repeating: "💵", count: numberOfDollarSigns)
+        return dollars.joined(separator: " ")
+    }
+    
 }
+
 
 extension Activity: Codable {
     

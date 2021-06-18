@@ -9,10 +9,11 @@ import Foundation
 
 class ActivityFetcher {
     
+    static let shared = ActivityFetcher()
+    
     enum APIError: Error {
         case corruptedResponse
     }
-    
     
     let url = URL(string: "https://www.boredapi.com/api/activity")!
     

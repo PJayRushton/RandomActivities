@@ -9,9 +9,14 @@ import SwiftUI
 
 struct ActivityCreationView: View {
     
+    // MARK: - Enums
+    
     enum Field: Int, Hashable, CaseIterable {
         case name, type
     }
+    
+    
+    // MARK: - State
     
     @State private var nameText = ""
     @State private var typeText = ""
@@ -19,13 +24,22 @@ struct ActivityCreationView: View {
     @State private var costSelection = 1
     @State private var accessibilitySelection = 0.5
     
+    
+    // MARK: - Focus State
+    
     @FocusState private var focusedField: Field?
     
-    private let dollarImage = Image(systemName: "dollarsign.circle")
+    
+    // MARK: - Properties
+    
     private var newActivityCreated: ((Activity) -> Void)?
     private var canSave: Bool {
         !nameText.isEmpty && !typeText.isEmpty
     }
+    
+    
+    // MARK: - Init
+    
     init(onCreation: @escaping ((Activity) -> Void)) {
         self.newActivityCreated = onCreation
     }

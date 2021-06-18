@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A10982A9267A67C500208120 /* ActivityCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10982A8267A67C500208120 /* ActivityCreationView.swift */; };
 		A1321BA8267A9D3300169DE6 /* ActivityNameEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1321BA7267A9D3300169DE6 /* ActivityNameEntryView.swift */; };
+		A137A24F267D2B6900F0023D /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A137A24E267D2B6900F0023D /* ActivityCell.swift */; };
 		A1E4649A26794769008A3868 /* SwiftUIScratchPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4649926794769008A3868 /* SwiftUIScratchPadApp.swift */; };
 		A1E4649C26794769008A3868 /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4649B26794769008A3868 /* ActivitiesView.swift */; };
 		A1E4649E2679476B008A3868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E4649D2679476B008A3868 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		A10982A8267A67C500208120 /* ActivityCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCreationView.swift; sourceTree = "<group>"; };
 		A1321BA7267A9D3300169DE6 /* ActivityNameEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityNameEntryView.swift; sourceTree = "<group>"; };
+		A137A24E267D2B6900F0023D /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		A1E4649626794769008A3868 /* SwiftUIScratchPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIScratchPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E4649926794769008A3868 /* SwiftUIScratchPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIScratchPadApp.swift; sourceTree = "<group>"; };
 		A1E4649B26794769008A3868 /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				A1E4649B26794769008A3868 /* ActivitiesView.swift */,
+				A137A24E267D2B6900F0023D /* ActivityCell.swift */,
 				A10982A8267A67C500208120 /* ActivityCreationView.swift */,
 				A1321BA7267A9D3300169DE6 /* ActivityNameEntryView.swift */,
 			);
@@ -177,6 +180,7 @@
 				A10982A9267A67C500208120 /* ActivityCreationView.swift in Sources */,
 				A1E4649C26794769008A3868 /* ActivitiesView.swift in Sources */,
 				A1321BA8267A9D3300169DE6 /* ActivityNameEntryView.swift in Sources */,
+				A137A24F267D2B6900F0023D /* ActivityCell.swift in Sources */,
 				A1E464B126794DC7008A3868 /* Activity.swift in Sources */,
 				A1E4649A26794769008A3868 /* SwiftUIScratchPadApp.swift in Sources */,
 			);
